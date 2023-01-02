@@ -1,17 +1,20 @@
 package com.survey_backend.domain;
 
+import com.survey_backend.domain.Enum.Role;
 import com.survey_backend.dto.MemberSignupRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "members")
-public class Member {
+public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,10 +31,15 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Member(MemberSignupRequestDto request){
-        email = request.getEmail();
-        password = request.getPassword();
-        nickname = request.getNickname();
+    @OneToMany(mappedBy = "member", cascade =  CascadeType.ALL)
+    private List<Survey> surveyList = new ArrayList<>();
+
+
+
+    public Member(MemberSignupRequestDto memberSignupRequestDto){
+        email = memberSignupRequestDto.getEmail();
+        password = memberSignupRequestDto.getPassword();
+        nickname = memberSignupRequestDto.getNickname();
         role = Role.USER;
     }
 
