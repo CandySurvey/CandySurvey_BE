@@ -14,6 +14,7 @@ import java.util.List;
 public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "section_id")
     private Long id;
 
     private String title;

@@ -17,6 +17,7 @@ import java.util.List;
 public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false, unique = true, length=50)
@@ -31,8 +32,11 @@ public class Member{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member", cascade =  CascadeType.ALL)
+    @OneToMany(mappedBy = "member_survey", cascade =  CascadeType.ALL)
     private List<Survey> surveyList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member_answer", cascade = CascadeType.ALL)
+    private List<Answer> answer = new ArrayList<>();
 
 
 

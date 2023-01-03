@@ -16,6 +16,7 @@ public class Survey{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "survey_id")
     private Long id;
 
     @Column(nullable = false)

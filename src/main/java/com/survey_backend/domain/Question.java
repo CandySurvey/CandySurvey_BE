@@ -17,6 +17,7 @@ import java.util.List;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "question_id")
     private Long id;
 
     private String title;
