@@ -36,7 +36,7 @@ public class Member{
     private List<Survey> surveyList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member_answer", cascade = CascadeType.ALL)
-    private List<Answer> answer = new ArrayList<>();
+    private List<Answer> answerList = new ArrayList<>();
 
 
 
