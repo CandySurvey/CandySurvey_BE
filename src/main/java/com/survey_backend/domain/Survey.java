@@ -30,8 +30,11 @@ public class Survey{
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "survey_section", cascade = CascadeType.ALL)
     private List<Section> sectionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "survey_answer", cascade = CascadeType.ALL)
+    private List<Section> answerList = new ArrayList<>();
 
     private String status;
 

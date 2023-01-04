@@ -26,7 +26,7 @@ public class Section {
     private Survey survey;
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<Question> question = new ArrayList<>();
+    private List<Question> questionList = new ArrayList<>();
 
     public Section(String title, String detail, Survey survey){
         this.title = title;

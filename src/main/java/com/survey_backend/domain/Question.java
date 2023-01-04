@@ -36,7 +36,7 @@ public class Question {
     private Section section;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Item> item = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
     public Question(String title, String detail, Required required,
                     Type type, String reg_express, Section section){
