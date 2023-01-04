@@ -12,11 +12,13 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findById(Long id);
 
-    @Query("SELECT distinct m FROM Member m join m.surveyList")
-    List<Member> findMemberwithSurveyUsingJoin();
+    Optional<Member> findByEmail(String email);
 
-    @Query("SELECT distinct m FROM Member m join m.answerList")
-    List<Member> findMemberwithAnswerUsingJoin();
+    @Query("SELECT distinct m FROM Member m join m.surveyList where m.nickname=:nickname")
+    Optional<Member> findMemberWithSurveyUsingJoin();
+
+    @Query("SELECT distinct m FROM Member m join m.answerList where m.nickname=:nickname")
+    Optional<Member> findMemberWithAnswerUsingJoin();
 
 
 }
