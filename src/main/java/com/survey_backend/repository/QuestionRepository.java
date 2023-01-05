@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
+
     @Query("SELECT distinct q FROM Question q join q.itemList where q.id=:id")
     Optional<Question> findQuestionWithItemUsingJoin();
 }
