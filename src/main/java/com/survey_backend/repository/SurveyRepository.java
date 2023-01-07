@@ -13,11 +13,11 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     Optional<Survey> findById(Long id);
 
-    @Query("SELECT distinct s FROM Survey s join s.sectionList where s.id=:id")
-    Optional<Survey> findSurveyWithSectionUsingJoin();
+    @Query("SELECT distinct s FROM Survey s join s.sectionList, s.answerList where s.id=:id")
+    Optional<Survey> findSurveyWithSectionUsingJoin(Long id);
 
     @Query("SELECT distinct s FROM Survey s join s.answerList where s.id=:id")
-    Optional<Survey> findMemberWithAnswerUsingJoin();
+    Optional<Survey> findMemberWithAnswerUsingJoin(Long id);
 
     List<Survey> findByTitleContaining(String title);
 
