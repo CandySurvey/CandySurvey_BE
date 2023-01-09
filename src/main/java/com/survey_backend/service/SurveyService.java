@@ -19,6 +19,6 @@ public class SurveyService {
     }
 
     public Optional<Survey> findSurveyWithAnswerAndSection(Survey survey){
-        return surveyRepository.findSurveyWithSectionUsingJoin(survey.getId());
+        return surveyRepository.findSurveyWithSectionAndAnswerUsingJoin(survey.getId());
     }
 }
