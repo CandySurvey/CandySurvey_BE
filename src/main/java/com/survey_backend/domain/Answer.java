@@ -18,17 +18,21 @@ public class Answer
 
     private String answer;
 
-    @ManyToOne
-    @JoinColumn(name = "survey_id")
-    private Survey survey;
+    private String member_nick;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private Long survey_id;
 
-    public Answer(String answer, Survey survey, Member member){
+//    @ManyToOne
+//    @JoinColumn(name = "survey_id")
+//    private Survey survey;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "member_id")
+//    private Member member;
+
+    public Answer(String answer, Long survey_id, String member_nick){
         this.answer = answer;
-        this.survey = survey;
-        this.member = member;
+        this.survey_id = survey_id;
+        this.member_nick = member_nick;
     }
 }

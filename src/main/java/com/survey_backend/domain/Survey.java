@@ -26,23 +26,28 @@ public class Survey{
 
     private String survey_hash;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private String member_nick;
 
-    @OneToMany(mappedBy = "survey_section", cascade = CascadeType.ALL)
-    private List<Section> sectionList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "survey_answer", cascade = CascadeType.ALL)
-    private List<Section> answerList = new ArrayList<>();
+//    @ManyToOne
+//    @JoinColumn(name = "member_id")
+//    private Member member;
 
     private String status;
+//
+//    @OneToMany(mappedBy = "survey_section", cascade = CascadeType.ALL)
+//    private List<Section> sectionList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "survey_answer", cascade = CascadeType.ALL)
+//    private List<Section> answerList = new ArrayList<>();
 
-    public Survey(String title, String detail, String survey_hash, Member member, String status){
+
+
+
+    public Survey(String title, String detail, String survey_hash, String member_nick, String status){
         this.title = title;
         this.detail = detail;
         this.survey_hash = survey_hash;
-        this.member = member;
+        this.member_nick = member_nick;
         this.status = status;
     }
 

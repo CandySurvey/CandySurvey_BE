@@ -21,16 +21,18 @@ public class Section {
 
     private String detail;
 
-    @ManyToOne
-    @JoinColumn(name = "survey_id")
-    private Survey survey;
+    private Long survey_id;
 
-    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
-    private List<Question> questionList = new ArrayList<>();
+//    @ManyToOne
+//    @JoinColumn(name = "survey_id")
+//    private Survey survey;
+//
+//    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+//    private List<Question> questionList = new ArrayList<>();
 
-    public Section(String title, String detail, Survey survey){
+    public Section(String title, String detail, Long survey_id){
         this.title = title;
         this.detail = detail;
-        this.survey = survey;
+        this.survey_id = survey_id;
     }
 }

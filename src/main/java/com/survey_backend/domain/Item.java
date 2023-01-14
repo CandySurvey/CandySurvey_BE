@@ -17,13 +17,15 @@ public class Item {
 
     private String line;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    private Long question_id;
 
-    public Item(String line, Question question){
+//    @ManyToOne
+//    @JoinColumn(name = "question_id")
+//    private Question question;
+
+    public Item(String line, Long question_id){
         this.line = line;
-        this.question = question;
+        this.question_id = question_id;
     }
 
 }

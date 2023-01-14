@@ -31,21 +31,23 @@ public class Question {
     @Nullable
     private String reg_express;
 
-    @ManyToOne
-    @JoinColumn(name = "section_id")
-    private Section section;
+    private Long section_id;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Item> itemList = new ArrayList<>();
+//    @ManyToOne
+//    @JoinColumn(name = "section_id")
+//    private Section section;
+//
+//    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+//    private List<Item> itemList = new ArrayList<>();
 
     public Question(String title, String detail, Required required,
-                    Type type, String reg_express, Section section){
+                    Type type, String reg_express, Long section_id){
         this.title = title;
         this.detail = detail;
         this.required = required;
         this.type = type;
         this.reg_express = reg_express;
-        this.section = section;
+        this.section_id = section_id;
     }
 
 }
