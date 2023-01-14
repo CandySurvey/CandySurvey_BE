@@ -14,11 +14,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByEmail(String email);
 
-    @Query("SELECT distinct m FROM Member m join m.surveyList where m.nickname=:nickname")
-    Optional<Member> findMemberWithSurveyUsingJoin();
-
-    @Query("SELECT distinct m FROM Member m join m.answerList where m.nickname=:nickname")
-    Optional<Member> findMemberWithAnswerUsingJoin();
+//    @Query("SELECT distinct m FROM Member m join m.surveyList where m.nickname=:nickname")
+//    Optional<Member> findMemberWithSurveyUsingJoin();
+//
+//    @Query("SELECT distinct m FROM Member m join m.answerList where m.nickname=:nickname")
+//    Optional<Member> findMemberWithAnswerUsingJoin();
 
 
 }

@@ -11,7 +11,9 @@ import java.util.Optional;
 @Repository
 public interface SectionRepository extends JpaRepository<Section, Long> {
 
-    @Query("SELECT distinct s FROM Section s join s.questionList where s.id=:id")
-    Optional<Section> findSectionWithQuestionUsingJoin();
+//    @Query("SELECT distinct s FROM Section s join s.questionList where s.id=:id")
+//    Optional<Section> findSectionWithQuestionUsingJoin();
+
+    List<Section> findSectionBySurvey_id(Long survey_id);
 
 }

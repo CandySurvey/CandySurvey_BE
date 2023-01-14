@@ -12,10 +12,14 @@ import java.util.Optional;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
-    @Query("SELECT distinct a FROM Answer a join a.member")
-    List<Answer> findAllAnswerWithMemberUsingJoin();
+//    @Query("SELECT distinct a FROM Answer a join a.member")
+//    List<Answer> findAllAnswerWithMemberUsingJoin();
+//
+//    @Query("SELECT distinct a FROM Answer a join a.member where a.id=:id")
+//    Optional<Answer> findOneAnswerWithMemberUsingJoin();
 
-    @Query("SELECT distinct a FROM Answer a join a.member where a.id=:id")
-    Optional<Answer> findOneAnswerWithMemberUsingJoin();
+    List<Answer> findAnswerBySurvey_id(Long survey_id);
+
+    List<Answer> findAnswerByMember_nick(String member_nick);
 
 }
