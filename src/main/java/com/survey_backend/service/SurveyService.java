@@ -18,7 +18,43 @@ public class SurveyService {
         return surveyRepository.save(survey);
     }
 
-    public Optional<Survey> findSurveyWithAnswerAndSection(Survey survey){
-        return surveyRepository.findSurveyWithSectionAndAnswerUsingJoin(survey.getId());
+    public List<Survey> findAllSurvey(){
+        return surveyRepository.findAll();
+    }
+
+    public List<Survey> findByTitle(Survey survey, String status){
+        return surveyRepository.findByTitleContainingAndStatus(survey.getTitle(), status);
+    }
+
+    public List<Survey> findSurveyPostByOwner(String nickname){
+        return surveyRepository.findByOwner(nickname);
+    }
+
+    public Optional<Survey> findSurveyById(Long id){
+        return checkSurveyExist(id);
+    }
+
+    public void deleteSurveyById(Long owner_id, Long id){
+        checkSurveyOwner(owner_id, id);
+        surveyRepository.deleteById(id);
+    }
+
+    public void deleteSurveysByMember(Long member_id){
+        surveyRepository.deleteSurveysByOwner(member_id);
+    }
+
+    public Optional<Survey> checkSurveyExist(Long id){
+        Optional<Survey> findSurvey = surveyRepository.findById(id);
+        if(findSurvey.isEmpty()){
+            throw new IllegalStateException("설문이 존재하지 않습니다.");
+        }
+        return findSurvey;
+    }
+
+    public void checkSurveyOwner(Long member_id, Long id){
+        Optional<Survey> findSurvey = surveyRepository.findById(id);
+        if(findSurvey.get().getOwner()!=member_id){
+            throw new IllegalStateException("권한이 없습니다.");
+        }
     }
 }
