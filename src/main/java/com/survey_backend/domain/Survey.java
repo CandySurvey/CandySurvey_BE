@@ -26,7 +26,7 @@ public class Survey{
 
     private String survey_hash;
 
-    private String owner;
+    private Long owner;
 
 //    @ManyToOne
 //    @JoinColumn(name = "member_id")
@@ -43,7 +43,7 @@ public class Survey{
 
 
 
-    public Survey(String title, String detail, String survey_hash, String owner, String status){
+    public Survey(String title, String detail, String survey_hash, Long owner, String status){
         this.title = title;
         this.detail = detail;
         this.survey_hash = survey_hash;
