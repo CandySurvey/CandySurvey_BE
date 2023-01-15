@@ -22,4 +22,8 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findAnswerByMember_nick(String member_nick);
 
+    void deleteAnswersByMember_nick(String nickname);
+
+    void deleteAnswersBySurvey_id(Long survey_id);
+
 }

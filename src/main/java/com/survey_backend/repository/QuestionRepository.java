@@ -18,4 +18,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 //    Optional<Question> findQuestionWithItemUsingJoin();
 
     List<Question> findQuestionBySection_id(Long section_id);
+
+    void deleteQuestionsBySection_id(Long section_id);
 }

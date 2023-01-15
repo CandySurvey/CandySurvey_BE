@@ -11,4 +11,6 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     List<Item> findItemByQuestion_id(Long question_id);
+
+    void deleteItemsByQuestion_id(Long question_id);
 }

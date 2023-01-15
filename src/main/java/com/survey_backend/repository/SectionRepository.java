@@ -16,4 +16,5 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
 
     List<Section> findSectionBySurvey_id(Long survey_id);
 
+    void deleteSectionsBySurvey_id(Long survey_id);
 }
