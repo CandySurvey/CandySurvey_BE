@@ -26,7 +26,7 @@ public class Survey{
 
     private String survey_hash;
 
-    private String member_nick;
+    private String owner;
 
 //    @ManyToOne
 //    @JoinColumn(name = "member_id")
@@ -43,11 +43,11 @@ public class Survey{
 
 
 
-    public Survey(String title, String detail, String survey_hash, String member_nick, String status){
+    public Survey(String title, String detail, String survey_hash, String owner, String status){
         this.title = title;
         this.detail = detail;
         this.survey_hash = survey_hash;
-        this.member_nick = member_nick;
+        this.owner = owner;
         this.status = status;
     }
 
