@@ -49,13 +49,13 @@ public class Member{
         this.role = Role.USER;
     }
 
-    public static Member createMember(MemberSignupRequestDto dto){
-        Member member = Member.builder()
-                .email(dto.getEmail())
-                .password(dto.getPassword())
-                .nickname(dto.getNickname())
-                .build();
-        return member;
+
+
+    public Member(MemberSignupRequestDto request){
+        email = request.getEmail();
+        password = request.getPassword();
+        nickname = request.getNickname();
+        role = Role.USER;
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder){
