@@ -12,15 +12,15 @@ import java.util.List;
 public class QuestionService {
     final QuestionRepository questionRepository;
 
-    public Question saveSection(Question question){
+    public Question saveQuestion(Question question){
         return questionRepository.save(question);
     }
 
-    public List<Question> findQuestionBySectionId(Long section_id){
-        return questionRepository.findQuestionBySection_id(section_id);
+    public List<Question> findQuestionBySurveyId(Long survey_id){
+        return questionRepository.findQuestionBySurvey_id(survey_id);
     }
 
-    public void deleteQuestionsBySectionId(Long section_id){
-        questionRepository.deleteQuestionsBySection_id(section_id);
+    public void deleteQuestionsBySurveyId(Long survey_id){
+        questionRepository.deleteQuestionsBySurvey_id(survey_id);
     }
 }
