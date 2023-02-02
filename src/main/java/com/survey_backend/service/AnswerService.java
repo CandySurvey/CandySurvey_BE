@@ -1,7 +1,7 @@
 package com.survey_backend.service;
 
 import com.survey_backend.domain.Answer;
-import com.survey_backend.domain.Section;
+
 import com.survey_backend.repository.AnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,8 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
-    public List<Answer> findAnswerBySurveyId(Long survey_id){
-        return answerRepository.findAnswerBySurvey_id(survey_id);
+    public List<Answer> findAnswerBySurveyId(String survey_hash){
+        return answerRepository.findAnswerBySurvey_hash(survey_hash);
     }
 
     public void deleteAnswersBySurveyId(Long survey_id){
