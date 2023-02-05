@@ -1,5 +1,7 @@
 package com.survey_backend.Controller;
 
+import com.survey_backend.domain.Question;
+import com.survey_backend.domain.Survey;
 import com.survey_backend.service.ItemService;
 import com.survey_backend.service.QuestionService;
 import com.survey_backend.service.SurveyService;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,6 +30,10 @@ public class SurveyController {
 
     @GetMapping("/survey/{code}")
     public String loadSurvey(@RequestParam String code){
+        String survey;
+        Optional<Survey> findSurvey = surveyService.findSurveyByHash(code);
+        List<Question> findQuestion = questionService.findQuestionBySurveyHash(code);
+        //반복문 이용해서 항목 불러오는 코드 가져오기
         return "";
     }
 

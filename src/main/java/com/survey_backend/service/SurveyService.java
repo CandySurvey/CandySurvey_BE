@@ -30,8 +30,8 @@ public class SurveyService {
         return surveyRepository.findByOwner(nickname);
     }
 
-    public Optional<Survey> findSurveyById(Long id){
-        return checkSurveyExist(id);
+    public Optional<Survey> findSurveyByHash(String hash){
+        return checkSurveyExist(hash);
     }
 
     public void deleteSurveyById(Long owner_id, Long id){
@@ -43,8 +43,8 @@ public class SurveyService {
         surveyRepository.deleteSurveysByOwner(member_id);
     }
 
-    public Optional<Survey> checkSurveyExist(Long id){
-        Optional<Survey> findSurvey = surveyRepository.findById(id);
+    public Optional<Survey> checkSurveyExist(String hash){
+        Optional<Survey> findSurvey = surveyRepository.findBySurvey_hash(hash);
         if(findSurvey.isEmpty()){
             throw new IllegalStateException("설문이 존재하지 않습니다.");
         }
