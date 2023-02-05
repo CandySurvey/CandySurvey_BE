@@ -31,7 +31,7 @@ public class Question {
     @Nullable
     private String reg_express;
 
-    private Long section_id;
+    private String survey_hash;
 
 //    @ManyToOne
 //    @JoinColumn(name = "section_id")
@@ -41,13 +41,13 @@ public class Question {
 //    private List<Item> itemList = new ArrayList<>();
 
     public Question(String title, String detail, Required required,
-                    Type type, String reg_express, Long section_id){
+                    Type type, String reg_express, String survey_hash){
         this.title = title;
         this.detail = detail;
         this.required = required;
         this.type = type;
         this.reg_express = reg_express;
-        this.section_id = section_id;
+        this.survey_hash = survey_hash;
     }
 
 }
