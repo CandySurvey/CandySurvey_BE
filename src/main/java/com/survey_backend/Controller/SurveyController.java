@@ -1,5 +1,7 @@
 package com.survey_backend.Controller;
 
+import com.google.gson.Gson;
+import com.survey_backend.domain.Item;
 import com.survey_backend.domain.Question;
 import com.survey_backend.domain.Survey;
 import com.survey_backend.service.ItemService;
@@ -26,15 +28,50 @@ public class SurveyController {
     @PostMapping("/create_survey")
     public void saveSurvey(HttpServletRequest request) throws IOException {
 
+
     }
 
     @GetMapping("/survey/{code}")
     public String loadSurvey(@RequestParam String code){
-        String survey;
+        String survey = "";
         Optional<Survey> findSurvey = surveyService.findSurveyByHash(code);
         List<Question> findQuestion = questionService.findQuestionBySurveyHash(code);
         //반복문 이용해서 항목 불러오는 코드 가져오기
-        return "";
+        survey = survey + "{ " + //survey {
+                "surveyTitle:" + findSurvey.get().getTitle() + ",\n" +
+                "surveyDetail:" + findSurvey.get().getDetail() + ".\n" +
+                "surveyType:" + findSurvey.get().getStatus() + ".\n" +
+                "question:{\n"; //question List {
+        var questionNum=0;
+        while(findQuestion.isEmpty()){
+           survey = survey +
+                   "question" + questionNum + ":" +
+                   "{\n" + //each question {
+                   "questionTitle:" + findQuestion.get(questionNum).getTitle() + ",\n" +
+                   "questionDetail:" + findQuestion.get(questionNum).getDetail() + ",\n" +
+                   "questionType:" + findQuestion.get(questionNum).getType() + ",\n" +
+                   "Items" + ":" +
+                   "{\n"; //items {
+           List<Item> findItem = itemService.findItemByQuestionId(findQuestion.get(questionNum).getId());
+           var itemNum=0;
+           while(findItem.isEmpty()) {
+               survey = survey +
+                       "item" + itemNum + ":" + findItem.get(itemNum).getLine() + ",\n";
+               findItem.remove(itemNum);
+               itemNum++;
+           }
+           survey = survey + "}\n"; //items }
+           questionNum++;
+           survey = survey + "}\n"; //each question }
+        }
+        survey = survey + "}\n"; //question List }
+        survey = survey + "}\n"; //survey }
+
+        String json = new Gson().toJson(survey);
+
+
+
+        return json;
     }
 
 }
