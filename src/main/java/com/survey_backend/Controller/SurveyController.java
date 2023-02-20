@@ -8,13 +8,14 @@ import com.survey_backend.service.ItemService;
 import com.survey_backend.service.QuestionService;
 import com.survey_backend.service.SurveyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,15 @@ public class SurveyController {
 
     @PostMapping("/create_survey")
     public void saveSurvey(HttpServletRequest request) throws IOException {
+        try{
+            ServletInputStream inputStream = request.getInputStream();
+            String json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        }catch(IllegalStateException e){
+
+        }
+
+
 
 
     }
