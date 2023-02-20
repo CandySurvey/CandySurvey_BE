@@ -38,25 +38,25 @@ public class SurveyController {
         List<Question> findQuestion = questionService.findQuestionBySurveyHash(code);
         //반복문 이용해서 항목 불러오는 코드 가져오기
         survey = survey + "{ " + //survey {
-                "surveyTitle:" + findSurvey.get().getTitle() + ",\n" +
-                "surveyDetail:" + findSurvey.get().getDetail() + ".\n" +
-                "surveyType:" + findSurvey.get().getStatus() + ".\n" +
-                "question:{\n"; //question List {
+                "\"surveyTitle\":" + "\"" + findSurvey.get().getTitle() + "\"" + ",\n" +
+                "\"surveyDetail\":" + "\"" + findSurvey.get().getDetail() + "\"" + ",\n" +
+                "\"surveyType\":" + "\"" + findSurvey.get().getStatus() + "\"" + ",\n" +
+                "\"question\":{\n"; //question List {
         var questionNum=0;
         while(findQuestion.isEmpty()){
            survey = survey +
-                   "question" + questionNum + ":" +
+                   "\"question" + questionNum + "\"" + ":" +
                    "{\n" + //each question {
-                   "questionTitle:" + findQuestion.get(questionNum).getTitle() + ",\n" +
-                   "questionDetail:" + findQuestion.get(questionNum).getDetail() + ",\n" +
-                   "questionType:" + findQuestion.get(questionNum).getType() + ",\n" +
-                   "Items" + ":" +
+                   "\"questionTitle\":" + "\"" + findQuestion.get(questionNum).getTitle() + "\"" + ",\n" +
+                   "\"questionDetail\":" + "\"" + findQuestion.get(questionNum).getDetail() + "\"" + ",\n" +
+                   "\"questionType\":" + "\"" + findQuestion.get(questionNum).getType() + "\"" + ",\n" +
+                   "\"Items\"" + ":" +
                    "{\n"; //items {
            List<Item> findItem = itemService.findItemByQuestionId(findQuestion.get(questionNum).getId());
            var itemNum=0;
            while(findItem.isEmpty()) {
                survey = survey +
-                       "item" + itemNum + ":" + findItem.get(itemNum).getLine() + ",\n";
+                       "\"item" + itemNum + "\"" + ":" + "\"" + findItem.get(itemNum).getLine() + "\"" + ",\n";
                findItem.remove(itemNum);
                itemNum++;
            }
