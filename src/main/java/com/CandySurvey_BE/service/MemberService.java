@@ -5,6 +5,8 @@ import com.CandySurvey_BE.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class MemberService {
@@ -17,13 +19,13 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member){
-        Member findMember = memberRepository.findByEmail(member.getEmail());
+        Optional<Member> findMember = memberRepository.findByEmail(member.getEmail());
         if(findMember!=null){
             throw new IllegalStateException("이미 가입된 이메일입니다.");
         }
     }
 
     public Member findByEmail(String email){
-        return memberRepository.findByEmail(email);
+        return memberRepository.findByEmail(email).get();
     }
 }
