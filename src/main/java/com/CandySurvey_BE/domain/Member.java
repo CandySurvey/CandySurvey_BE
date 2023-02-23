@@ -26,7 +26,7 @@ public class Member{
     private String password;
 
     @Column(nullable = false)
-    private String nickname;
+    private String name;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -40,20 +40,20 @@ public class Member{
 
 
     @Builder
-    public Member(String email, String password, String nickname){
+    public Member(String email, String password, String name, Role role){
         this.email = email;
         this.password = password;
-        this.nickname = nickname;
-        this.role = Role.USER;
+        this.name = name;
+        this.role = role;
     }
 
+    public Member update(String name){
+        this.name = name;
+        return this;
+    }
 
-
-    public Member(MemberSignupRequestDto request){
-        email = request.getEmail();
-        password = request.getPassword();
-        nickname = request.getNickname();
-        role = Role.USER;
+    public String getRoleKey(){
+        return this.role.getKey();
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder){
