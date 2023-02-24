@@ -9,9 +9,7 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, String> {
 
-    Optional<Member> findByEmail(String email);
-
-    Member findByNickname(String nickname);
+    Optional<Member> findByEmailAAndProvider(String email, String provider);
 
 //    @Query("SELECT distinct m FROM Member m join m.surveyList where m.nickname=:nickname")
 //    Optional<Member> findMemberWithSurveyUsingJoin();

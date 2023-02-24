@@ -52,36 +52,59 @@ package com.CandySurvey_BE.security;
 //
 //}
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
-public class SecurityConfig {
-    private final CustomOAuth2UserService customOAuth2UserService;
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService){
-        this.customOAuth2UserService = customOAuth2UserService;
-    }
+    //Customized OAuth2UserService DI
+    @Autowired
+    private CustomOAuth2UserService customOAuth2UserService;
 
+    //encoder
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception{
-        http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .authorizeRequests()
-                .antMatchers("/api/user").permitAll()
-                .and()
-                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
-        return http.build();
+    @Override
+    public void configure(WebSecurity web) throws Exception{
+        web.ignoring().mvcMatchers("/members/**", "/image/**");
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception{
+
+    }
+
+//    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+//        this.customOAuth2UserService = customOAuth2UserService;
+//    }
+
+//    2023.02.23
+//    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService){
+//        this.customOAuth2UserService = customOAuth2UserService;
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception{
+//        http
+//                .csrf().disable()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .formLogin().disable()
+//                .httpBasic().disable()
+//                .authorizeRequests()
+//                .antMatchers("/api/user").permitAll()
+//                .and()
+//                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+//        return http.build();
+//    }
+//    2023.02.23
 }
