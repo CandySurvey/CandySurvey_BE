@@ -1,16 +1,17 @@
 package com.CandySurvey_BE.domain;
 
 import com.CandySurvey_BE.domain.Enum.Role;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
+
+@DynamicUpdate
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 public class Member {
     @Id
@@ -27,22 +28,25 @@ public class Member {
     @Column(name = "provider", nullable = false)
     private String provider;
 
-    @Column(name = "picture")
-    private String picture;
+//    @Column(name = "picture")
+//    private String picture;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "role")
+//    private Role role;
 
-    public Member(String name, String email, String provider, String picture){
+    @Builder
+    public Member(String name, String email, String provider){
         this.name = name;
         this.email = email;
         this.provider = provider;
-        this.picture = picture;
+//        this.picture = picture;
+//        this.role = role;
     }
 
-    public Member update(String picture){
-        this.picture = picture;
+    public Member update(String name, String email){
+        this.name = name;
+        this.email = email;
 
         return this;
     }
