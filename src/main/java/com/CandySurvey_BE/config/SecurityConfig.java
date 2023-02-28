@@ -1,4 +1,4 @@
-package com.CandySurvey_BE.security;
+package com.CandySurvey_BE.config;
 
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
@@ -52,19 +52,24 @@ package com.CandySurvey_BE.security;
 //
 //}
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Customized OAuth2UserService DI
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
+//    @Autowired
+//    private CustomOAuth2UserService customOAuth2UserService;
+
+    private final OAuthService oAuthService;
 
     //encoder
     @Bean
@@ -81,6 +86,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
 
+        http
+                .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .logout().logoutSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .defaultSuccessUrl("/oauth2/loginInfo", true)
+                .userInfoEndpoint()
+                .userService(oAuthService);
     }
 
 //    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
