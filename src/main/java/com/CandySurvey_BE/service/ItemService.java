@@ -17,10 +17,10 @@ public class ItemService {
     }
 
     public List<Item> findItemByQuestionId(Long question_id){
-        return itemRepository.findItemByQuestion_id(question_id);
+        return itemRepository.findItemByQuestion(question_id);
     }
 
     public void deleteItemsByQuestionId(Long question_id){
-        itemRepository.deleteItemsByQuestion_id(question_id);
+        itemRepository.deleteItemsByQuestion(question_id);
     }
 }

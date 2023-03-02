@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    List<Item> findItemByQuestion_id(Long question_id);
+    List<Item> findItemByQuestion(Long question);
 
-    void deleteItemsByQuestion_id(Long question_id);
+    void deleteItemsByQuestion(Long question);
 }

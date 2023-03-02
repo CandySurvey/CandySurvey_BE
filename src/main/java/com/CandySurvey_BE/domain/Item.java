@@ -17,7 +17,7 @@ public class Item {
 
     private String line;
 
-    private Long question_id;
+    private Long question;
 
 //    @ManyToOne
 //    @JoinColumn(name = "question_id")
@@ -25,7 +25,7 @@ public class Item {
 
     public Item(String line, Long question_id){
         this.line = line;
-        this.question_id = question_id;
+        this.question = question_id;
     }
 
 }
