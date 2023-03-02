@@ -18,14 +18,14 @@ public class AnswerService {
     }
 
     public List<Answer> findAnswerBySurveyId(String survey_hash){
-        return answerRepository.findAnswerBySurvey_hash(survey_hash);
+        return answerRepository.findAnswerByHash(survey_hash);
     }
 
     public void deleteAnswersBySurveyId(Long survey_id){
-        answerRepository.deleteAnswersBySurvey_id(survey_id);
+//        answerRepository.deleteAnswersBySurvey_id(survey_id);
     }
 
-    public void deleteAnswersByMemberNick(String nickname){
-        answerRepository.deleteAnswersByMember_nick(nickname);
-    }
+//    public void deleteAnswersByMemberNick(String nickname){
+//        answerRepository.deleteAnswersByMember_nick(nickname);
+//    }
 }

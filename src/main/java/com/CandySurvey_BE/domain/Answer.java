@@ -18,9 +18,9 @@ public class Answer
 
     private String answer;
 
-    private String member_nick;
+    private String nick;
 
-    private String survey_hash;
+    private String hash;
 
 //    @ManyToOne
 //    @JoinColumn(name = "survey_id")
@@ -30,9 +30,9 @@ public class Answer
 //    @JoinColumn(name = "member_id")
 //    private Member member;
 
-    public Answer(String answer, String survey_hash, String member_nick){
+    public Answer(String answer, String hash, String nick){
         this.answer = answer;
-        this.survey_hash = survey_hash;
-        this.member_nick = member_nick;
+        this.hash = hash;
+        this.nick = nick;
     }
 }

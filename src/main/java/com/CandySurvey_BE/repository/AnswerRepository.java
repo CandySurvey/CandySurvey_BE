@@ -15,12 +15,12 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 //    @Query("SELECT distinct a FROM Answer a join a.member where a.id=:id")
 //    Optional<Answer> findOneAnswerWithMemberUsingJoin();
 
-    List<Answer> findAnswerBySurvey_hash(String survey_hash);
+    List<Answer> findAnswerByHash(String hash);
 
-    List<Answer> findAnswerByMember_nick(String member_nick);
+//    List<Answer> findAnswerByMember_nick(String member_nick);
 
-    void deleteAnswersByMember_nick(String nickname);
+//    void deleteAnswersByMember_nick(String nickname);
 
-    void deleteAnswersBySurvey_id(Long survey_id);
+//    void deleteAnswersBySurvey_id(Long survey_id);
 
 }
