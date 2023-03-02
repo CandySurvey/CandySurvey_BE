@@ -44,7 +44,7 @@ public class SurveyService {
     }
 
     public Optional<Survey> checkSurveyExist(String hash){
-        Optional<Survey> findSurvey = surveyRepository.findBySurvey_hash(hash);
+        Optional<Survey> findSurvey = surveyRepository.findByHash(hash);
         if(findSurvey.isEmpty()){
             throw new IllegalStateException("설문이 존재하지 않습니다.");
         }

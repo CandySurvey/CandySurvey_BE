@@ -14,7 +14,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     List<Survey> findByTitleContainingAndStatus(String title, String status);
 
-    Optional<Survey> findBySurvey_hash(String survey_hash);
+    Optional<Survey> findByHash(String hash);
 
     List<Survey> findByOwner(String owner);
 
