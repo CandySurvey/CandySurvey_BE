@@ -29,7 +29,7 @@ public class Question {
     @Nullable
     private String reg_express;
 
-    private String survey_hash;
+    private String hash;
 
 //    @ManyToOne
 //    @JoinColumn(name = "section_id")
@@ -45,7 +45,7 @@ public class Question {
         this.required = required;
         this.type = type;
         this.reg_express = reg_express;
-        this.survey_hash = survey_hash;
+        this.hash = survey_hash;
     }
 
 }

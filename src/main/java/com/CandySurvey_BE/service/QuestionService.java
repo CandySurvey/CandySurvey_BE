@@ -16,11 +16,11 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public List<Question> findQuestionBySurveyHash(String survey_hash){
-        return questionRepository.findQuestionBySurvey_hash(survey_hash);
+    public List<Question> findQuestionBySurveyHash(String hash){
+        return questionRepository.findQuestionByHash(hash);
     }
 
-    public void deleteQuestionsBySurveyId(String survey_hash){
-        questionRepository.deleteQuestionsBySurvey_hash(survey_hash);
+    public void deleteQuestionsBySurveyId(String hash){
+        questionRepository.deleteQuestionsByHash(hash);
     }
 }

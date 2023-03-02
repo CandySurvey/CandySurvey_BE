@@ -14,7 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 //    @Query("SELECT distinct q FROM Question q join q.itemList where q.id=:id")
 //    Optional<Question> findQuestionWithItemUsingJoin();
 
-    List<Question> findQuestionBySurvey_hash(String survey_hash);
+    List<Question> findQuestionByHash(String hash);
 
-    void deleteQuestionsBySurvey_hash(String survey_hash);
+    void deleteQuestionsByHash(String hash);
 }
