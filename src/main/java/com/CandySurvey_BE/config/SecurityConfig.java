@@ -52,7 +52,6 @@ package com.CandySurvey_BE.config;
 //
 //}
 
-import com.CandySurvey_BE.domain.Enum.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -66,61 +65,38 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    2023.03.06 주석처리
-//    private final OAuthService oAuthService;
-//
-//    //encoder
-//    @Bean
-//    public BCryptPasswordEncoder encoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Override
-//    public void configure(WebSecurity web) throws Exception{
-//        web.ignoring().mvcMatchers("/members/**", "/image/**");
-//        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-//    }
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception{
-//
-//        http
-//                .csrf().disable()
-//                .headers().frameOptions().disable()
-//                .and()
-//                .logout().logoutSuccessUrl("/")
-//                .and()
-//                .oauth2Login()
-//                .defaultSuccessUrl("/oauth2/loginInfo", true)
-//                .userInfoEndpoint()
-//                .userService(oAuthService);
-//    }
+    //Customized OAuth2UserService DI
+//    @Autowired
+//    private CustomOAuth2UserService customOAuth2UserService;
 
+    private final OAuthService oAuthService;
 
-// 2023.03.06 임시 추가
+    //encoder
+    @Bean
+    public BCryptPasswordEncoder encoder(){
+        return new BCryptPasswordEncoder();
+    }
 
-    private final CustomOAuth2UserService customOAuth2UserService;
+    @Override
+    public void configure(WebSecurity web) throws Exception{
+        web.ignoring().mvcMatchers("/members/**", "/image/**");
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
 
-        http.csrf().disable()
+        http
+                .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                    .authorizeRequests()
-                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
-                    .antMatchers("/api/v1/**").hasRole(Role.USER.name())
-                    .anyRequest().authenticated()
+                .logout().logoutSuccessUrl("/")
                 .and()
-                    .logout()
-                    .logoutSuccessUrl("/")
-                .and()
-                    .oauth2Login()
-                    .userInfoEndpoint()
-                    .userService(customOAuth2UserService);
-
+                .oauth2Login()
+                .defaultSuccessUrl("/oauth2/loginInfo", true)
+                .userInfoEndpoint()
+                .userService(oAuthService);
     }
-
 
 //    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
 //        this.customOAuth2UserService = customOAuth2UserService;
