@@ -1,6 +1,7 @@
 package com.CandySurvey_BE.domain;
 
 import com.CandySurvey_BE.domain.Enum.Role;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,16 +34,23 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    public User(String name, String email, String provider, String picture){
+    @Builder
+    public User(String name, String email, String picture, Role role){
         this.name = name;
         this.email = email;
-        this.provider = provider;
+//        this.provider = provider;
         this.picture = picture;
+        this.role = role;
     }
 
-    public User update(String picture){
+    public User update(String name, String picture){
+        this.name = name;
         this.picture = picture;
 
         return this;
+    }
+
+    public String getRoleKey(){
+        return this.role.getKey();
     }
 }
