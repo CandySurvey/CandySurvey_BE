@@ -26,6 +26,7 @@ public enum OAuthAttributes {
         Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");
 
         MemberProfile memberProfile = new MemberProfile();
+        memberProfile.setName((String) kakaoProfile.get("nickname"));
         memberProfile.setEmail((String) kakaoAccount.get("email"));
         return memberProfile;
     });

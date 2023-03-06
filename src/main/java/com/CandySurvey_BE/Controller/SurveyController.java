@@ -25,11 +25,17 @@ public class SurveyController {
     private final QuestionService questionService;
     private final ItemService itemService;
 
+    //목록
+
+
+    //survey 저장
     @PostMapping("/create_survey")
     public void saveSurvey(HttpServletRequest request) throws IOException {
         try{
             ServletInputStream inputStream = request.getInputStream();
             String json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+
 
         }catch(IllegalStateException e){
 
@@ -40,6 +46,7 @@ public class SurveyController {
 
     }
 
+    //survey 불러오기
     @GetMapping("/survey/{code}")
     public String loadSurvey(@RequestParam String code){
         String survey = "";
