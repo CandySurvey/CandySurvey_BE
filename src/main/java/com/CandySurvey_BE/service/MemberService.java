@@ -12,10 +12,8 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    public Member saveMember(Member member){
-//        validateDuplicateMember(member);
-
-        return memberRepository.save(member);
+    public Member findMember(String email, String provider){
+        return memberRepository.findByEmailAndProvider(email, provider).get();
     }
 
 //    private void validateDuplicateMember(Member member){
