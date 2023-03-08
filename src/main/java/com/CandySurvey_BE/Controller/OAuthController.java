@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class OAuthController {
 
+    //로그인 성공시 보이는 화면
     @GetMapping("/loginInfo")
     public String oauthLoginInfo(Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
 
@@ -37,37 +38,24 @@ public class OAuthController {
         return attributes.toString();
     }
 
+    //로그아웃 시 세션 삭제
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+
+        return "session invalidate";
+    }
+
+    //세션 유저 정보 확인
     @GetMapping("/sessionInfo")
     public String sessionInfo(HttpServletRequest request){
         HttpSession session = request.getSession();
 
-        return session.getAttribute("provider").toString();
+
+        return session.getAttribute("provider").toString()+", "
+                + session.getAttribute("email").toString()+", "
+                + session.getAttribute("name").toString();
     }
 
-//    public String oauthLoginInfo(Authentication authentication){
-//
-//        System.out.println("test : "+authentication);
-//        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-//
-//        Map<String, Object> attributes = oAuth2User.getAttributes();
-////        System.out.println("attributes : " + attributes);
-//
-//        return attributes.toString();
-//    }
-
-//    private final AuthService authService;
-
-//    @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public String login(@RequestBody JwtRequestDto request){
-//        try{
-//            return authService.login(request);
-//        }catch(Exception e){
-//            return e.getMessage();
-//        }
-//    }
-//
-//    @PostMapping(value = "signup", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public String signup(@RequestBody MemberSignupRequestDto request){
-//        return authService.signup(request);
-//    }
 }
