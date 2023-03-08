@@ -1,5 +1,7 @@
 package com.CandySurvey_BE.Controller;
 
+import com.CandySurvey_BE.domain.Member;
+import com.CandySurvey_BE.service.MemberService;
 import com.google.gson.Gson;
 import com.CandySurvey_BE.domain.Item;
 import com.CandySurvey_BE.domain.Question;
@@ -7,6 +9,9 @@ import com.CandySurvey_BE.domain.Survey;
 import com.CandySurvey_BE.service.ItemService;
 import com.CandySurvey_BE.service.QuestionService;
 import com.CandySurvey_BE.service.SurveyService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,19 +26,33 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
+//@RequestMapping("/survey")
 public class SurveyController {
     private final SurveyService surveyService;
     private final QuestionService questionService;
     private final ItemService itemService;
+    private final MemberService memberService;
 
     //목록
 
     //survey 저장
-    @PostMapping("/create_survey")
+    @PostMapping("/survey/create")
     public void saveSurvey(HttpServletRequest request) throws IOException {
+        HttpSession session = request.getSession();
+
+        Member owner = memberService.findMember(session.getAttribute("email").toString(), session.getAttribute("email").toString());
+
         try{
             ServletInputStream inputStream = request.getInputStream();
             String json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+            JSONObject jsonObject = new JSONObject(json);
+
+            Survey survey = new Survey(jsonObject.getString("title"), jsonObject.getString("detail"), jsonObject.getString("hash"), owner.getId(), jsonObject.getString("status"));
+//            surveyService.saveSurvey()
+//            JSONArray = jsonObject.getJSONArray("")
+
+
 
 
 
@@ -57,7 +76,7 @@ public class SurveyController {
                 "\"surveyTitle\":" + "\"" + findSurvey.get().getTitle() + "\"" + ",\n" +
                 "\"surveyDetail\":" + "\"" + findSurvey.get().getDetail() + "\"" + ",\n" +
                 "\"surveyType\":" + "\"" + findSurvey.get().getStatus() + "\"" + ",\n" +
-                "\"question\":{\n"; //question List {
+                "\"question\":[\n"; //question List {
         var questionNum=0;
         while(findQuestion.isEmpty()){
            survey = survey +
@@ -67,7 +86,7 @@ public class SurveyController {
                    "\"questionDetail\":" + "\"" + findQuestion.get(questionNum).getDetail() + "\"" + ",\n" +
                    "\"questionType\":" + "\"" + findQuestion.get(questionNum).getType() + "\"" + ",\n" +
                    "\"Items\"" + ":" +
-                   "{\n"; //items {
+                   "[\n"; //items {
            List<Item> findItem = itemService.findItemByQuestionId(findQuestion.get(questionNum).getId());
            var itemNum=0;
            while(findItem.isEmpty()) {
@@ -76,11 +95,11 @@ public class SurveyController {
                findItem.remove(itemNum);
                itemNum++;
            }
-           survey = survey + "}\n"; //items }
+           survey = survey + "]\n"; //items }
            questionNum++;
            survey = survey + "}\n"; //each question }
         }
-        survey = survey + "}\n"; //question List }
+        survey = survey + "]\n"; //question List }
         survey = survey + "}\n"; //survey }
 
         String json = new Gson().toJson(survey);
