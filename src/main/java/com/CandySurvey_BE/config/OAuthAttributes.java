@@ -28,6 +28,7 @@ public enum OAuthAttributes {
         MemberProfile memberProfile = new MemberProfile();
         memberProfile.setName((String) kakaoProfile.get("nickname"));
         memberProfile.setEmail((String) kakaoAccount.get("email"));
+
         return memberProfile;
     });
 

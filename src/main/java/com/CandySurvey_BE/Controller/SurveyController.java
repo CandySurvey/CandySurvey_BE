@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -26,7 +27,6 @@ public class SurveyController {
     private final ItemService itemService;
 
     //목록
-
 
     //survey 저장
     @PostMapping("/create_survey")
