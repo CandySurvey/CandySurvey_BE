@@ -20,6 +20,8 @@ public class Answer
 
     private String nick;
 
+    private String email;
+
     private String hash;
 
 //    @ManyToOne
@@ -30,9 +32,10 @@ public class Answer
 //    @JoinColumn(name = "member_id")
 //    private Member member;
 
-    public Answer(String answer, String hash, String nick){
+    public Answer(String answer, String hash, String nick, String email){
         this.answer = answer;
         this.hash = hash;
         this.nick = nick;
+        this.email = email;
     }
 }
