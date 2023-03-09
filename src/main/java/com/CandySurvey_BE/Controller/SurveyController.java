@@ -1,5 +1,7 @@
 package com.CandySurvey_BE.Controller;
 
+import com.CandySurvey_BE.domain.Enum.Required;
+import com.CandySurvey_BE.domain.Enum.Type;
 import com.CandySurvey_BE.domain.Member;
 import com.CandySurvey_BE.service.MemberService;
 import com.google.gson.Gson;
@@ -47,10 +49,33 @@ public class SurveyController {
             String json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
             JSONObject jsonObject = new JSONObject(json);
+            String surveyTitle = jsonObject.getString("title");
+            String surveyDetail = jsonObject.getString("detail");
+            String surveyHash = jsonObject.getString("hash");
+            String surveyStatus = jsonObject.getString("status");
 
-            Survey survey = new Survey(jsonObject.getString("title"), jsonObject.getString("detail"), jsonObject.getString("hash"), owner.getId(), jsonObject.getString("status"));
-//            surveyService.saveSurvey()
-//            JSONArray = jsonObject.getJSONArray("")
+            Survey savedSurvey = new Survey(surveyTitle, surveyDetail, surveyHash, owner.getId(), surveyStatus);
+            surveyService.saveSurvey(savedSurvey);
+
+            JSONArray questions = jsonObject.getJSONArray("questions");
+            for(int i=0; i<questions.length(); i++){
+                JSONObject question = questions.getJSONObject(i);
+                String questionTitle = question.getString("questionTitle");
+                String questionDetail = question.getString("questionDetail");
+                String questionType = question.getString("questionType");
+                String questionRequire = question.getString("questionRequire");
+
+                Question savedQuestion = new Question(questionTitle, questionDetail, Required.valueOf(questionRequire), Type.valueOf(questionType), surveyHash);
+                questionService.saveQuestion(savedQuestion);
+
+                JSONArray questionItems = question.getJSONArray("items");
+                for(int j=0; j<questionItems.length(); j++){
+                    JSONObject item = questionItems.getJSONObject(j);
+
+                    Item savedItem = new Item(item.getString("item"), savedQuestion.getId());
+                    itemService.saveItem(savedItem);
+                }
+            }
 
 
 
@@ -80,7 +105,7 @@ public class SurveyController {
         var questionNum=0;
         while(findQuestion.isEmpty()){
            survey = survey +
-                   "\"question" + questionNum + "\"" + ":" +
+                   "\"question" + "\"" + ":" +
                    "{\n" + //each question {
                    "\"questionTitle\":" + "\"" + findQuestion.get(questionNum).getTitle() + "\"" + ",\n" +
                    "\"questionDetail\":" + "\"" + findQuestion.get(questionNum).getDetail() + "\"" + ",\n" +
@@ -91,7 +116,7 @@ public class SurveyController {
            var itemNum=0;
            while(findItem.isEmpty()) {
                survey = survey +
-                       "\"item" + itemNum + "\"" + ":" + "\"" + findItem.get(itemNum).getLine() + "\"" + ",\n";
+                       "{\"item" + "\"" + ":" + "\"" + findItem.get(itemNum).getLine() + "\"}" + ",\n";
                findItem.remove(itemNum);
                itemNum++;
            }
