@@ -26,8 +26,8 @@ public class Question {
 
     private Type type;
 
-    @Nullable
-    private String reg_express;
+//    @Nullable
+//    private String reg_express;
 
     private String hash;
 
@@ -39,12 +39,12 @@ public class Question {
 //    private List<Item> itemList = new ArrayList<>();
 
     public Question(String title, String detail, Required required,
-                    Type type, String reg_express, String survey_hash){
+                    Type type, String survey_hash){
         this.title = title;
         this.detail = detail;
         this.required = required;
         this.type = type;
-        this.reg_express = reg_express;
+//        this.reg_express = reg_express;
         this.hash = survey_hash;
     }
 
