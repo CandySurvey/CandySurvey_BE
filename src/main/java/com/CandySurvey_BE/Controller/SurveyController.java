@@ -72,22 +72,13 @@ public class SurveyController {
                 for(int j=0; j<questionItems.length(); j++){
                     JSONObject item = questionItems.getJSONObject(j);
 
-                    Item savedItem = new Item(item.getString("item"), savedQuestion.getId());
+                    Item savedItem = new Item(item.getString("item"), Long.valueOf(j), savedQuestion.getId());
                     itemService.saveItem(savedItem);
                 }
             }
-
-
-
-
-
         }catch(IllegalStateException e){
 
         }
-
-
-
-
     }
 
     //survey 불러오기
@@ -128,8 +119,6 @@ public class SurveyController {
         survey = survey + "}\n"; //survey }
 
         String json = new Gson().toJson(survey);
-
-
 
         return json;
     }
