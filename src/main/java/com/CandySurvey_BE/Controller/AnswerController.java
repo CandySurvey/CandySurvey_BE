@@ -26,7 +26,7 @@ public class AnswerController {
     @GetMapping("/answer/{code}")
     public String loadAnswer(@PathVariable String code){
         List<Answer> answerList = answerService.findAnswerBySurveyId(code);
-        return "answerList";
+        return answerList.toString();
     }
 
     @PostMapping("/answer/{code}")
@@ -38,7 +38,7 @@ public class AnswerController {
         try{
             ServletInputStream inputStream = request.getInputStream();
             String json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
-            Answer saveAnswer = new Answer(json, code, submitter.getName(), submitter.getEmail());
+            Answer saveAnswer = new Answer(json, code, submitter);
             answerService.saveAnswer(saveAnswer);
         }catch(IllegalStateException e){
 

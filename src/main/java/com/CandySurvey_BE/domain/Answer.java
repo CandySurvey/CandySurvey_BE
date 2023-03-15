@@ -1,5 +1,6 @@
 package com.CandySurvey_BE.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,9 +19,13 @@ public class Answer
 
     private String answer;
 
-    private String nick;
+//    private String nick;
+//
+//    private String email;
 
-    private String email;
+    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberInfo")
+    private Member member;
 
     private String hash;
 
@@ -32,10 +37,10 @@ public class Answer
 //    @JoinColumn(name = "member_id")
 //    private Member member;
 
-    public Answer(String answer, String hash, String nick, String email){
+    @Builder
+    public Answer(String answer, String hash, Member member){
         this.answer = answer;
         this.hash = hash;
-        this.nick = nick;
-        this.email = email;
+        this.member = member;
     }
 }
