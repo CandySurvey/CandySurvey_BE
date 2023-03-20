@@ -54,7 +54,7 @@ public class SurveyController {
             String surveyHash = jsonObject.getString("hash");
             String surveyStatus = jsonObject.getString("status");
 
-            Survey savedSurvey = new Survey(surveyTitle, surveyDetail, surveyHash, owner.getId(), surveyStatus);
+            Survey savedSurvey = new Survey(surveyTitle, surveyDetail, surveyHash, owner, surveyStatus);
             surveyService.saveSurvey(savedSurvey);
 
             JSONArray questions = jsonObject.getJSONArray("questions");

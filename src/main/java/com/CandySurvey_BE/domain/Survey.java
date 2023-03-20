@@ -23,13 +23,11 @@ public class Survey{
 
     private String hash;
 
-    private Long owner;
-
     private String status;
 
-//    @ManyToOne
-//    @JoinColumn(name = "member_id")
-//    private Member member;
+    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "memberInfo")
+    private Member member;
 //
 //    @OneToMany(mappedBy = "survey_section", cascade = CascadeType.ALL)
 //    private List<Section> sectionList = new ArrayList<>();
@@ -40,11 +38,11 @@ public class Survey{
 
 
 
-    public Survey(String title, String detail, String hash, Long owner, String status){
+    public Survey(String title, String detail, String hash, Member member, String status){
         this.title = title;
         this.detail = detail;
         this.hash = hash;
-        this.owner = owner;
+        this.member = member;
         this.status = status;
     }
 
