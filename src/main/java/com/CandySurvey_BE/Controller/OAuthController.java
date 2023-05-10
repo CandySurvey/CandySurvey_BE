@@ -2,6 +2,7 @@ package com.CandySurvey_BE.Controller;
 
 import com.CandySurvey_BE.config.OAuthService;
 //import com.CandySurvey_BE.service.AuthService;
+import com.CandySurvey_BE.domain.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -57,5 +58,28 @@ public class OAuthController {
                 + session.getAttribute("email").toString()+", "
                 + session.getAttribute("name").toString();
     }
+
+//    @GetMapping("/local")
+//    public String localJoin(HttpServletRequest request){
+//        String name = request.getParameter("name");
+//        String email = request.getParameter("email");
+//        String password = request.getParameter("password");
+//
+//        try{
+//            MemberFormDto memberFormDto = MemberFormDto.builder()
+//                    .MemberID(id)
+//                    .Password(pw)
+//                    .Nickname(nickname)
+//                    .build();
+//            Member member = Member.createMember(memberFormDto);
+//            Member savedMember = memberService.saveMember(member);
+//            System.out.println("Member ID : " + savedMember.getMemberID());
+//            return "join success";
+//        } catch(IllegalStateException e){
+//            return "error";
+//        }
+//
+//        return "";
+//    }
 
 }

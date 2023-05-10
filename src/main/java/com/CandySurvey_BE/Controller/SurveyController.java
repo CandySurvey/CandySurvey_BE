@@ -37,6 +37,12 @@ public class SurveyController {
 
     //목록
 
+    @GetMapping("/test")
+    public void test(HttpServletRequest request) throws IOException{
+        ServletInputStream inputStream = request.getInputStream();
+        String json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+        System.out.println(json);
+    }
     //survey 저장
     @PostMapping("/survey/create")
     public void saveSurvey(HttpServletRequest request) throws IOException {
@@ -96,7 +102,7 @@ public class SurveyController {
         var questionNum=0;
         while(findQuestion.isEmpty()){
            survey = survey +
-                   "\"question" + "\"" + ":" +
+                   "\"questions" + "\"" + ":" +
                    "{\n" + //each question {
                    "\"questionTitle\":" + "\"" + findQuestion.get(questionNum).getTitle() + "\"" + ",\n" +
                    "\"questionDetail\":" + "\"" + findQuestion.get(questionNum).getDetail() + "\"" + ",\n" +

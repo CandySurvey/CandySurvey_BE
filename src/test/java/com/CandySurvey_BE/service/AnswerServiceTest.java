@@ -43,7 +43,7 @@ class AnswerServiceTest {
     public void answerMemberInfo(){
         Member member = createMember("Kang", "test@gmail.com", "google");
         Answer answer = createAnswer("test answer", "1q2w3e4r", member);
-
+        System.out.println(answer.getMember());
         List<Answer> findAnswer = answerService.findAnswerBySurveyId("1q2w3e4r");
 
         System.out.println(findAnswer.get(0).getMember().getEmail());

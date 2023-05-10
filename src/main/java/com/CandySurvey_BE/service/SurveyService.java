@@ -26,9 +26,9 @@ public class SurveyService {
         return surveyRepository.findByTitleContainingAndStatus(survey.getTitle(), status);
     }
 
-    public List<Survey> findSurveyPostByOwner(String nickname){
-        return surveyRepository.findByOwner(nickname);
-    }
+//    public List<Survey> findSurveyPostByOwner(String nickname){
+//        return surveyRepository.findByOwner(nickname);
+//    }
 
     public Optional<Survey> findSurveyByHash(String hash){
         return checkSurveyExist(hash);
@@ -39,9 +39,9 @@ public class SurveyService {
         surveyRepository.deleteById(id);
     }
 
-    public void deleteSurveysByMember(Long member_id){
-        surveyRepository.deleteSurveysByOwner(member_id);
-    }
+//    public void deleteSurveysByMember(Long member_id){
+//        surveyRepository.deleteSurveysByOwner(member_id);
+//    }
 
     public Optional<Survey> checkSurveyExist(String hash){
         Optional<Survey> findSurvey = surveyRepository.findByHash(hash);
@@ -53,7 +53,8 @@ public class SurveyService {
 
     public void checkSurveyOwner(Long member_id, Long id){
         Optional<Survey> findSurvey = surveyRepository.findById(id);
-        if(findSurvey.get().getOwner()!=member_id){
+
+        if(findSurvey.get().getMember().getId()!=member_id){
             throw new IllegalStateException("권한이 없습니다.");
         }
     }

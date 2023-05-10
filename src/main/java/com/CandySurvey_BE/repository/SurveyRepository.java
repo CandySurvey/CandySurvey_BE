@@ -16,9 +16,9 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     Optional<Survey> findByHash(String hash);
 
-    List<Survey> findByOwner(String owner);
-
-    void deleteSurveysByOwner(Long member_id);
+//    List<Survey> findByOwner(String owner);
+//
+//    void deleteSurveysByOwner(Long member_id);
 
 
 

@@ -1,6 +1,7 @@
 package com.CandySurvey_BE.Controller;
 
 import com.CandySurvey_BE.config.OAuthService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -33,6 +34,7 @@ class OAuthControllerTest {
     private OAuthService oAuthService;
 
     @Test
+    @DisplayName("userTest")
     void OAuthLogin() throws Exception{
         DefaultOAuth2User user = makeDefaultOAuth2User();
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, "password", user.getAuthorities());
